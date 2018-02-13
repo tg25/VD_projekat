@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>poslovi.com | Poslovi</title>
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery.min.js"></script>
+		 <!-- Custom Theme files -->
+		 <!---- animated-css ---->
+		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="js/wow.min.js"></script>
+		
+		
+		<script language="javascript">
+		var id;
+		
+			function getFile(file){
+				document.getElementById(file).click();
+			
+			
+			
+			}
+			
+			function poziv(obj, putanja){
+				var file = obj.value;
+				var fileName = file.split("\\");
+				f=fileName[fileName.length-1];
+				document.getElementById(putanja).innerHTML = f;
+			
+			
+			}
+			
+			function getFile0(){
+				getFile("file");
+			}
+			
+			function poziv0(obj){
+				poziv(obj,"putanja")
+			}
+			
+			function getFile1(){
+				getFile("file1");
+			}
+			
+			function poziv1(obj){
+				poziv(obj,"putanja1")
+			}
+			
+			function getFile2(){
+				getFile("file2");
+			}
+			
+			function poziv2(obj){
+				poziv(obj,"putanja2")
+			}
+		
+			function prikaziPolje(){
+				document.getElementById("motivaciono").style.display="inline";
+			
+			}
+			
+			function provera(test){
+				
+				var i=1;
+				put=document.getElementById("putanja").innerHTML;
+				if (put==test) {document.getElementById("poruka").style.display="inline"; i=0;}
+				else document.getElementById("poruka").style.display="none";
+				if (document.getElementById("putanja2").innerHTML==test && document.getElementById("mot").value=="") {document.getElementById("poruka1").style.display="inline"; i=0;}
+				else document.getElementById("poruka1").style.display="none";
+				
+				t=/^([A-Z]([a-z])*\s?)+$/
+				if (document.getElementById("ime").value=="") {document.getElementById("ime").value="Upisite ime!"; i=0;}
+				else{
+				if (!t.test(document.getElementById("ime").value)) {document.getElementById("ime").value+="   //Niste pravilno uneli ime!"; i=0; }
+				
+				}
+				
+				
+				if (document.getElementById("mobilni").value=="") {document.getElementById("mobilni").value="Unesite broj mobilnog telefona!"; i=0;}
+				
+				
+			
+				t=/\w+@\w+(.\w)+/
+				if (document.getElementById("email").value=="") {document.getElementById("email").value="Unesite e-mail!"; i=0;}
+				
+				else {
+					if (!t.test(document.getElementById("email").value)){
+						document.getElementById("email").value="   //Niste pravilno uneli e-mail!"; i=0; }
+					
+				}
+				
+				if (document.getElementById("obrazovanje").options[0].selected || document.getElementById("iskustvo").options[0].selected || document.getElementById("jezik").options[0].selected || document.getElementById("java").options[0].selected || document.getElementById("android").options[0].selected || document.getElementById("ios").options[0].selected || document.getElementById("cc").options[0].selected || document.getElementById("c").options[0].selected || document.getElementById("phone").options[0].selected){
+					i=0;
+					alert("Niste sve popunili");
+				}
+				
+				
+				
+				
+				if (i==1){
+				id=setInterval("salji()",500);
+				}
+				
+			
+				
+			
+			}
+			
+			function salji(){
+				document.getElementById("progres").style.display="inline";
+				document.getElementById("slanje").style.display="inline";
+				document.getElementById("status").style.display="inline";
+				
+				if (document.getElementById("status").style.width=="95%"){
+				
+				clearInterval(id);
+				document.getElementById("slanje").innerHTML="Poslato!";
+				}
+				t=document.getElementById("status").style.width;
+				t=t.split("%");
+				t=parseInt(t[0],10)+5;
+				document.getElementById("status").style.width=t+"%";
+				document.getElementById("status").innerHTML=t+"%";
+			}
+		
+		
+		</script>
+		
+		<script>
+		 new WOW().init();
+		</script>
+		<!---- animated-css ---->
+		  
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+   		 <!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+		<link rel="icon" href="../favicon.ico" type="image/x-icon">
+		<!----webfonts--->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+		<!---//webfonts--->
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+</head>
+<body>
+<div class="bg4">
+	 <div class="container">
+			 <!----- start-header---->
+			  <div id="home" class="header">
+			 <div class="top-header">
+			 <div class="logo">
+			<a href="pocetna.html"><img src="../novi logo.gif" width="250" title="dreams" /></a>
+			 </div>
+		 <!----start-top-nav---->
+		 <nav class="top-nav">
+		  <span class="menu"> </span>
+			<ul class="top-nav">
+				<li><a href="pocetna.html">Poèetna</a></li>
+				<li class="active"><a href="poslovi.html">Poslovi</a></li>
+				<li><a href="vesti.html">Vesti</a></li>
+				<li><a href="kompanije.html">Kompanije</a></li>
+				<li><a href="onama.html">O nama</a></li>
+				<li ><a href="kontakt.html">Kontaktirajte nas!</a></li>
+			</ul>
+				<script>
+					$("span.menu").click(function(){
+						$(".top-nav ul").slideToggle(200);
+					});
+				</script>
+		</nav>
+			<div class="clearfix"> </div>
+			</div>
+	</div>
+				 
+				 <div class="contact-banner text-right">					  
+						<h2>Prijava</h2>
+						<a href="pocetna.html"><font color="#b6d53b">POÈETNA</font></a><font color="white">>></font><a href="poslovi.html"><font color="#b6d53b">POSLOVI</font></a><font color="white">>></font><a href="posao0.html"><font color="#b6d53b">POSAO</font></a><font color="white">>></font><a href="#"><font color="#b6d53b">FORMA</font></a>				 
+				 </div>
+				<div class="clearfix"></div>		
+		     </div>	
+		 </div>
+<!----- banner ---->
+	 <div class="container">
+		<form name="forma>
+	      <div class="contact-us">				
+				<div class="contact-us_left">
+					<div class="contact-us_info">
+			    	 	<h3 class="style">Uèitajte dokumenta</h3>
+			    	 	
+						<input type="button" id="laznodugme" value="uèitajte CV" onclick="getFile0()"> </input>
+						<p id="putanja">Nije izabran fajl</p>
+						<div style='height: 0px;width: 0px; overflow:hidden;'><input id="file" type="file" value="upload" onchange="poziv0(this)"/></div>
+						
+						<br/>
+						
+						<input type="button" id="laznodugme" value="uèitajte Motivaciono pismo" onclick="getFile1()"> </input>
+						<p id="putanja1">Nije izabran fajl</p>
+						<div style='height: 0px;width: 0px; overflow:hidden;'><input id="file1" type="file" value="upload" onchange="poziv1(this)"/></div>
+						
+						
+						
+						
+						<br/>
+						
+						<input type="button" value="napisite Motivaciono pismo"  onclick="prikaziPolje()"> </input>
+						
+						<br/>
+						<br/>
+						
+						<input type="button" id="laznodugme" value="uèitajte preporuke" onclick="getFile2()"> </input>
+						<p id="putanja2">Nije izabran fajl</p>
+						<div style='height: 0px;width: 0px; overflow:hidden;'><input id="file2" type="file" value="upload" onchange="poziv2(this)"/></div>
+						
+						<br/>
+						
+						<font style="display:none;" color="red" id="poruka"><i>Uèitajte CV!</i></font>
+						<br/>
+						<font style="display:none;" color="red" id="poruka1"><i>Uèitajte ili napisite motivaciono pismo!</i></font>
+						
+      				</div>
+      			 <div class="company_address">
+
+				   </div>
+				</div>				
+				<div class="contact_right">
+				  <div class="contact-form konkurs">
+				  	<h3 class="style">Popunite formu</h3>
+					    
+					    	<div>
+						    	<p>IME</p>
+						    	<span><input id="ime" name="userName" type="text" class="textbox"></span>
+						    </div>
+						    <div>
+						    	<p>E-MAIL</p>
+						    	<span><input id="email" name="userEmail" type="text" class="textbox"></span>
+						    </div>
+						    <div>
+						     	<p>BROJ MOBILNOG TELEFONA</p>
+						    	<span><input id="mobilni"  name="userPhone" type="text" class="textbox"></span>
+						    </div>
+						    <div id="motivaciono">
+						    	<p>Motivaciono pismo</p>
+						    	<span><textarea id="mot" name="userMsg"> </textarea></span>
+						    </div>
+						   
+							<div>
+						    	
+						    	<span>
+								
+								<div class="prvi">Koji je vas nivo obrazovanja?</div>
+									<select id="obrazovanje">
+										<option>--izaberite--</option>
+										<option>Osnovna škola</option>
+										<option>Srednja škola</option>
+										<option>Visoka škola ili Bachelor</option>
+										<option>Master/Fakultet</option>
+										<option>Doktorat</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							
+							<div>
+						    	
+						    	<span>
+								<div class="par">Koliko godina radnog iskustva imate?</div>
+									<select id="iskustvo">
+										<option>--izaberite--</option>
+										<option>1-5</option>
+										<option>5-10</option>
+										<option>10-15</option>
+										<option>15-20</option>
+										<option>preko 20</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							<div>
+						    	
+						    	<span>
+								<div class="par">Ocenite svoje znanje engleskog jezika?</div>
+									<select id="jezik">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							
+							<div>
+						    	
+						    	<span>
+								<div class="par">Ocenite svoje znanje Java-e?</div>
+									<select id="java">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							<div>
+						    	
+						    	<span>
+								<div class="par">Ocenite svoje znanje Android-a?</div>
+									<select id="android">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							<div>
+						    	
+						    	<span>
+								<div class="par">Ocenite svoje znanje iOS-a?</div>
+									<select id="ios">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+						    	
+							<div>
+						    	
+						    	<span>
+								<div class="par">Ocenite svoje znanje Windows Phone-a?</div>
+									<select id="phone">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							<div>
+						    	
+						    	<span>
+								<div class="par">Ocenite svoje znanje C++ -a?</div>
+									<select id="cc">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							<div>
+						    	
+						    	<span>
+									<div class="par">Ocenite svoje znanje C#-a?</div>
+									<select id="c">
+										<option>--izaberite--</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								
+								</span>
+						    </div>
+							
+							<br/>
+							<div>
+						   		<input type="button" value="potvrdi" onclick="provera('Nije izabran fajl')">
+						  </div>
+							
+							
+															
+					    
+				    </div>
+					
+					<br/>
+					<br/>
+					<p id="slanje">Slanje...</p>
+					<br/>
+					<div class="progress" id="progres">
+								  <div id="status" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+									60%
+								  </div>
+					</div>
+					
+					<br/>
+					<br/>
+  				</div>		
+  				<div class="clear"></div>		
+		  </div>
+		 </form>
+	 </div>	
+</div>	 
+<!---- footer ---->
+			<div class="footer">
+				<div class="container">
+					<div class="footer-grids">
+						<div class="col-md-3 footer-grid ftr-sec">
+							<h3>poslovi.com</h3>
+							<ul>
+								<li><a href="pocetna.html">Poèetna</a></li>
+								<li><a href="onama.html">O nama</a></li>
+								<li><a href="vesti.html">Vesti</a></li>
+								<li><a href="poslovi.html">Poslovi</a></li>
+								<li><a href="kompanije.html">Kompanije</a></li>
+								<li><a href="kontakt.html">Kontaktirajte nas!</a></li>
+								<li><a href="form.html">English</a></li>								
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid ftr-sec">
+							
+						</div>
+						<div class="col-md-3 footer-grid ftr-sec">
+							<h3>pratite nas</h3>
+							<ul class="social-icons">
+								<li><a class="twitter" href="#"><span> </span>twitter</a></li>
+								<li><a class="facebook" href="#"><span> </span>Facebook</a></li>
+								<li><a class="googlepluse" href="#"><span> </span>google+</a></li>								
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid ftr-sec ftr">
+							<h3>gde smo</h3>
+							<ul class="location">
+								<li><a class="hm" href="#"><span> </span>bul. kralja aleksandra 73, beograd</a></li>
+								<li><a class="phn" href="#"><span> </span>TELEFON:123456789.</a></li>
+							</ul>							
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<p class="copy-right">2015 &copy; Design by <a href="#">Gala Trbojevic i Ana Pesic</a></p>
+				</div>
+			</div>
+			<!---- footer ---->
+
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE HTML>
+<html>
+	 <head>
+		<title>poslovi.com | Jobs</title>
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery.min.js"></script>
+		 <!-- Custom Theme files -->
+		 <!---- animated-css ---->
+		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="js/wow.min.js"></script>
+		<script>
+		 new WOW().init();
+		</script>
+		<!---- animated-css ---->
+		  
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+   		 <!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+		<link rel="icon" href="../favicon.ico" type="image/x-icon">
+		<!----webfonts--->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+		<!---//webfonts--->
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+		
+		
+		<script language="javascript">
+		
+		var niz=[];
+		var n=12;
+		var i=0;
+		
+		function ucitaj(){
+		
+		for(i=0; i<n; i++){
+			var v="vreme"+i;
+			v=document.getElementById(v).innerHTML;
+			
+			var p="p"+i;
+			p=document.getElementById(p).innerHTML;
+			
+			var nas="naslov"+i;
+			nas=document.getElementById(nas).innerHTML;
+			
+			var l="link"+i;
+			l=document.getElementById(l).href;
+			
+			var t="tekst"+i;
+			t=document.getElementById(t).innerHTML;
+			
+			var s="slika"+i;
+			s=document.getElementById(s).src;
+			
+			var d="det"+i;
+			d=document.getElementById(d).href;
+			
+			var k="kompanija"+i;
+			k=document.getElementById(k).innerHTML;
+
+			niz[i]={vreme:v, paragraf:p, tekst:t, naslov:nas, link:l, slika:s, detalji:d, kompanija:k};
+			
+			var	rok=proveriVreme(niz[i].vreme, i);
+			vreme="vreme"+i;
+			if (rok==3){document.getElementById(vreme).style.backgroundColor="lightgray";
+			document.getElementById(vreme).style.border="1px solid lightgray";
+			}
+			if (rok==1) {document.getElementById(vreme).style.backgroundColor="red";
+			document.getElementById(vreme).style.border="1px solid red";}
+			
+		}
+	
+		
+		
+		}
+		
+		function uporedi(a,b){
+		var str=a.vreme;
+		var vreme=str.split(".");
+		
+		vreme.reverse();
+		vreme[2]=parseInt(vreme[2],10)-1;
+		var c = new Date(vreme[1],vreme[2],vreme[3]);
+		var str=b.vreme;
+		var vreme=str.split(".");
+		vreme.reverse();
+		vreme[2]=parseInt(vreme[2],10)-1;
+		var d = new Date(vreme[1],vreme[2],vreme[3]);
+		if (document.getElementById("sortiranje").options[1].selected) return c.getTime()-d.getTime();
+		else return d.getTime()-c.getTime();
+		
+		}
+
+	function sortiraj() {
+		
+		
+		niz.sort(uporedi);
+		
+		
+		for(i=0; i<n; i++){
+			var v="vreme"+i;
+			document.getElementById(v).innerHTML=niz[i].vreme;
+			
+			var	rok=proveriVreme(niz[i].vreme, i);
+			if (rok==3){document.getElementById(v).style.backgroundColor="lightgray";
+			document.getElementById(v).style.border="1px solid lightgray";
+			}
+			if (rok==1) {document.getElementById(v).style.backgroundColor="red";
+			document.getElementById(v).style.border="1px solid red";}
+			
+			if (rok==2) {document.getElementById(v).style.backgroundColor="#b6d53b";
+			document.getElementById(v).style.border="1px solid #b6d53b";}
+			
+			
+			var t="tekst"+i;
+			document.getElementById(t).innerHTML=niz[i].tekst;
+			
+			var p="p"+i;
+			document.getElementById(p).innerHTML=niz[i].paragraf;
+			
+			var nas="naslov"+i;
+			document.getElementById(nas).innerHTML=niz[i].naslov;
+			
+			var l="link"+i;
+			document.getElementById(l).href=niz[i].link;
+			
+			var s="slika"+i;
+			document.getElementById(s).src=niz[i].slika;
+			
+			var d="det"+i;
+			document.getElementById(d).href=niz[i].detalji;
+			
+			var k="kompanija"+i;
+			document.getElementById(k).innerHTML=niz[i].kompanija;
+
+			
+
+		}
+		
+	}
+	
+	
+		function vratisve(){
+		
+			for (j=0; j<n; j++){
+				 document.getElementById(j).style.display="inline";
+				 document.getElementById("povratak").style.display="none";
+				}
+		
+		}
+		
+		function pretraga(test){
+			document.getElementById("grad").value=test;
+			pronadji();
+		
+		}
+		
+		function proveriVreme(rok, i){
+			var vreme=rok.split(".");
+		
+		vreme.reverse();
+		vreme[2]=parseInt(vreme[2],10)-1;
+		var c = new Date(vreme[1],vreme[2],vreme[3]);
+		c=c.getTime();
+		var d = new Date();
+		d=d.getTime();
+		razlika=c-d;
+		if(razlika<0) return 3;
+		razlika=razlika/86400000;
+		if (razlika<4) return 1;
+		else return 2;
+		}
+		
+		
+		
+		
+		
+	
+		function pronadji(){
+			vratisve();
+			var i=0;
+			var m=8;
+			var grad=document.mojaforma.grad.value;
+			var poslodavac=document.mojaforma.poslodavac.value;
+			
+			if (grad!=document.mojaforma.grad.options[0].value){
+				document.getElementById("povratak").style.display="inline";
+				for (j=0; j<n; j++){
+					test=niz[j].paragraf;
+					test=test.split("-");
+					test=test[1];
+					grad=grad.toUpperCase();
+					if (test!=grad) document.getElementById(j).style.display="none";
+					else document.getElementById(j).style.display="inline";
+				}
+			}
+			
+			if (poslodavac!=document.mojaforma.poslodavac.options[0].value){
+				document.getElementById("povratak").style.display="inline";
+				for (j=0; j<n; j++){
+					test=niz[j].kompanija;
+					if (test!=poslodavac) document.getElementById(j).style.display="none"
+				}
+			}
+			
+			var patt=[];
+			var broj=0;
+			for (i=0; i<m; i++){
+				izbor="izbor"+i;
+				if (document.getElementById(izbor).checked){
+				document.getElementById("povratak").style.display="inline";	
+				str=document.getElementById(izbor).value
+				patt[broj]=new RegExp(str);
+				broj++;
+				
+				}
+				
+				}
+			for (i=0; i<n; i++){
+					x=niz[i].paragraf;
+					for(j=0; j<patt.length; j++){
+					if (!patt[j].test(x)) document.getElementById(i).style.display="none";
+					}
+				}	
+			
+			
+			
+			rokovi=document.mojaforma.rokovi.value;
+			var i=0;
+			if (rokovi!=document.mojaforma.rokovi.options[0].value){
+				document.getElementById("povratak").style.display="inline";
+				if(rokovi==document.mojaforma.rokovi.options[1].value) i=1;
+				if(rokovi==document.mojaforma.rokovi.options[2].value) i=2;
+				if(rokovi==document.mojaforma.rokovi.options[3].value) i=3;
+				
+				for(j=0; j<n; j++){
+					var	rok=proveriVreme(niz[j].vreme, i);
+					if (i!=rok)document.getElementById(j).style.display="none";
+					
+				
+				}
+				
+				}
+			}
+		
+		
+		
+		
+		</script>		
+		
+		
+	 </head>
+	 <body onload="ucitaj()">
+		 <div class="bg24">
+			   <div class="container">
+			      <!----- start-header---->
+			      <div id="home" class="header">
+					   <div class="top-header">
+						  <div class="logo">
+							<a href="home.html"><img src="../novi logo.gif" width="250" title="dreams" /></a>
+						 </div>
+						 <!----start-top-nav---->
+						 <nav class="top-nav">
+						  <span class="menu"> </span>
+							<ul class="top-nav">
+								<li><a href="home.html">Home</a></li>
+								<li class="active"><a href="poslovi.html">Jobs</a></li>
+								<li><a href="news.html">News</a></li>
+								<li><a href="companies.html">Companies</a></li>
+								<li><a href="about.html">About us</a></li>
+								<li><a href="contact.html">Contact us!</a></li>
+							</ul>							
+						 </nav>
+						 <script>
+					$("span.menu").click(function(){
+						$(".top-nav ul").slideToggle(200);
+					});
+				</script>
+						 <div class="clearfix"> </div>
+					  </div>
+				 </div>
+				 
+				 <div class="service-banner text-right">					  
+						<h2>Jobs</h2>
+						<p ><a href="home.html"><font color="#b6d53b">HOME</font></a>>><a href="#"><font color="#b6d53b">JOBS</font></a></p>		
+				</div>
+				 </div>
+				<div class="clearfix"></div>		
+		     </div>	
+		 <!----- banner ---->
+			 <div class="service-sec">
+				  <div class="container">	
+					    <h3>Jobs</h3>
+						<p class="ser">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',
+						making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose injected humour and the like.</p>
+				
+				 <div class="contact-form sort">
+				  	<h3 class="style">Filter</h3>
+					    <form method="post" action="pocetna.html" name="mojaforma">
+						
+							<p>Sort</p>
+					    	<div id="selectsortiranje">
+						    	
+						    	<select id="sortiranje" >
+								<option>--Choose--</option>
+								<option>from oldest to newest</option>
+								<option>from newest to oldest</option>
+								</select>
+							<br/>
+								
+						    </div>
+							
+							<div id="dugme0"><input type="button" value="Sort" onclick="sortiraj()"></div>
+						    
+							<p>Search</p>
+							
+							<div id="selectgrad">
+						    	
+						    	<select name="grad" id="grad">
+										<option>--City--</option>
+										<option>Beograd</option>
+										<option>Novi Sad</option>
+										<option>Subotica</option>
+										<option>Nis</option>
+								</select>
+						    </div>
+						    <div id="selectposlodavac">
+						     	
+						    	<select name="poslodavac">
+									<option>--Company--</option>
+									<option>Comtrade</option>
+									<option>Microsoft</option>
+									<option>Nordeus</option>
+									<option>PIN</option>
+									<option>SAGA</option>
+								</select>
+								
+							</div>
+							
+							<div id="selectrokovi">
+						     	
+						    	<select name="rokovi">
+									<option>--Expiration date--</option>
+									<option>Near expire day</option>
+									<option>Topical</option>
+									<option>Expired</option>
+								</select>
+								
+							</div>
+							
+							<div class="selectvestine">
+						     	
+								<div id="g1">
+								<input type="checkbox" id="izbor0" value="java">java</input>
+								<input type="checkbox" id="izbor1" value="SQL">SQL</input>
+								</div>
+								<div id="g2">
+								<input type="checkbox" id="izbor2" value=".NET">.NET</input>
+								<input type="checkbox" id="izbor3" value="iOS">iOS</input>
+								</div>
+								<div id="g3">
+								<input type="checkbox" id="izbor4" value="PHP">PHP</input>
+								<input type="checkbox" id="izbor5" value="javascript">javascript</input>
+								</div>
+								<div id="g4">
+								<input type="checkbox" id="izbor6" value="Linux">Linux</input>
+								<input type="checkbox" id="izbor7" value="Android">Android</input>
+								</div>
+							</div>
+							
+							<div id="dugme1"><input type="button" value="Find" onclick="pronadji()">
+								<input id="povratak" style="display:none" type="button" value="Clear" onclick="vratisve()"></div>
+
+						   
+					    </form>
+				    </div>
+					  
+					  
+					  
+					  
+					  
+					  <div class="service-grids">
+						  <div class="col-md-3 service-grid" id="0">						
+									<a id="det0" href="comtrade_en.html"><img id="slika0" src="../comtrade.gif" height="160"  alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst0">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov0">Job1</h4>
+									<p class="sg" id="p0">-BEOGRAD- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|SQL|.NET|PHP| </p>
+									<a id="link0" class="btn" href="posao0.html">More</a>
+									<div class="time" id="vreme0">12.06.2015.</div>
+									<div  id="kompanija0" style="display:none">Comtrade</div>
+						 </div>
+						  <div class="col-md-3 service-grid" id="1">							 
+									<a  id="det1" href="microsoft_en.html"><img  id="slika1"  src="../microsoft logo.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst1">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov1">Job2</h4>
+									<p id="p1" class="sg">-NOVI SAD- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|Linux|SQL|</p>
+									<a id="link1" class="btn" href="posao0.html">More</a>
+									<div  class="time" id="vreme1">25.08.2015.</div>
+									<div  id="kompanija1" style="display:none">Microsoft</div>									
+						  </div>
+						  <div class="col-md-3 service-grid" id="2">							 
+									<a id="det2" href="saga_en.html"><img id="slika2" src="../imageedit_5_8303481757.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst2">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov2">Job3</h4>
+									<p id="p2" class="sg">-BEOGRAD- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|iOS|Android|</p>
+									<a id="link2" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme2">16.07.2015.</div>	
+									<div  id="kompanija2" style="display:none">SAGA</div>
+						  </div>
+						  <div class="col-md-3 service-grid" id="3">							
+									<a  id="det3" href="pin_en.html"><img id="slika3" src="../imageedit_3_5424707639.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst3">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov3">Job4</h4>
+									<p id="p3" class="sg">-NIS- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|javascript|SQL|Linux|HTML|</p>
+									<a id="link3" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme3">16.09.2015.</div>	
+									<div  id="kompanija3" style="display:none">PIN</div>
+						  </div>
+						  <div class="clearfix"></div>
+					 </div> 
+					 
+					 <div class="service-grids2">
+						  <div class="col-md-3 service-grid" id="4">							 
+									<a id="det4" href="nordeus_en.html"><img id="slika4" src="../Nordeus_logo_-_new.png" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst4">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov4">Job5</h4>
+									<p id="p4" class="sg">-NOVI SAD-In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|SQL|HTML|PHP|</p>
+									<a id="link4" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme4">12.07.2015.</div>	
+									<div  id="kompanija4" style="display:none">Nordeus</div>
+						  </div>
+						  <div class="col-md-3 service-grid" id="5">							 
+									<a id="det5" href="saga_en.html"><img id="slika5" src="../imageedit_5_8303481757.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst5">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov5">Job6</h4>
+									<p id="p5" class="sg">-SUBOTICA-In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|SQL|.NET|PHP|</p>
+									<a id="link5" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme5">21.08.2015.</div>	
+									<div  id="kompanija5" style="display:none">SAGA</div>
+						  </div>
+						  <div class="col-md-3 service-grid" id="6">							 
+									<a  id="det6" href="comtrade_en.html"><img id="slika6" src="../comtrade.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst6">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov6">Job7</h4>
+									<p id="p6" class="sg">-NIS- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|iOS|Android|</p>
+									<a id="link6" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme6">16.05.2015.</div>
+									<div  id="kompanija6" style="display:none">Comtrade</div>
+						  </div>
+						  <div class="col-md-3 service-grid" id="7">							 
+									<a  id="det7" href="pin_en.html"><img id="slika7" src="../imageedit_3_5424707639.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst7">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov7">Job8</h4>
+									<p id="p7" class="sg">-SUBOTICA- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|iOS|Android|</p>
+									<a id="link7" class="btn" href="posao0.html">More</a>		
+									<div class="time" id="vreme7">16.09.2015.</div>	
+									<div  id="kompanija7" style="display:none">PIN</div>
+						  </div>
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  <div class="clearfix"></div>
+					 </div>
+					 
+					 
+					 
+					 
+					 <div class="service-grids">
+						  <div class="col-md-3 service-grid" id="8">						
+									<a id="det8" href="comtrade_en.html"><img id="slika8" src="../comtrade.gif" height="160"  alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst8">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov8">Job9</h4>
+									<p class="sg" id="p8">-BEOGRAD- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|SQL|.NET|PHP| </p>
+									<a id="link8" class="btn" href="posao0.html">More</a>
+									<div class="time" id="vreme8">12.08.2015.</div>
+									<div  id="kompanija8" style="display:none">Comtrade</div>
+						 </div>
+						  <div class="col-md-3 service-grid" id="9">							 
+									<a  id="det9" href="microsoft_en.html"><img  id="slika9"  src="../microsoft logo.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst9">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov9">Posao9</h4>
+									<p id="p9" class="sg">-NOVI SAD- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|Linux|SQL|</p>
+									<a id="link9" class="btn" href="posao0.html">More</a>
+									<div  class="time" id="vreme9">25.03.2015.</div>
+									<div  id="kompanija9" style="display:none">Microsoft</div>									
+						  </div>
+						  <div class="col-md-3 service-grid" id="10">							 
+									<a id="det10" href="saga_en.html"><img id="slika10" src="../imageedit_5_8303481757.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst10">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov10">Job10</h4>
+									<p id="p10" class="sg">-BEOGRAD- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|java|iOS|Android|</p>
+									<a id="link10" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme10">11.06.2015.</div>	
+									<div  id="kompanija10" style="display:none">SAGA</div>
+						  </div>
+						  <div class="col-md-3 service-grid" id="11">							
+									<a  id="det11" href="pin_en.html"><img id="slika11" src="../imageedit_3_5424707639.gif" height="160" alt=""/></a>
+									<div class="tour-caption">
+									<p id="tekst11">In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus.</p>
+									</div>
+									<h4 id="naslov11">Job11</h4>
+									<p id="p11" class="sg">-NIS- In sit amet dapibus libero. Phasellus nec bibendum dui Sed fermentum finibus purus. Ut dignissim risus eget magna efficitur sagittis. <br/>|javascript|SQL|Linux|HTML|</p>
+									<a id="link11" class="btn" href="posao0.html">More</a>	
+									<div class="time" id="vreme11">16.02.2015.</div>	
+									<div  id="kompanija11" style="display:none">PIN</div>
+						  </div>
+						  <div class="clearfix"></div>
+					 </div> 
+					 
+				 </div>
+
+			  </div>
+					
+	
+			
+			<!---- footer ---->
+			<div class="footer">
+				<div class="container">
+					<div class="footer-grids">
+						<div class="col-md-3 footer-grid ftr-sec">
+							<h3>poslovi.com</h3>
+							<ul>
+								<li><a href="home.html">Home</a></li>
+								<li><a href="about.html">About us</a></li>
+								<li><a href="news.html">News</a></li>
+								<li><a href="jobs.html">Jobs</a></li>
+								<li><a href="companies.html">Companies</a></li>
+								<li><a href="contact.html">Contact us!</a></li>	
+								<li><a href="poslovi.html">Srpski</a></li>	
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid ftr-sec">
+							
+						</div>
+						<div class="col-md-3 footer-grid ftr-sec">
+							<h3>follow us</h3>
+							<ul class="social-icons">
+								<li><a class="twitter" href="#"><span> </span>twitter</a></li>
+								<li><a class="facebook" href="#"><span> </span>Facebook</a></li>
+								<li><a class="googlepluse" href="#"><span> </span>google+</a></li>								
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid ftr-sec ftr">
+							<h3>gde smo</h3>
+							<ul class="location">
+								<li><a class="hm" href="#"><span> </span>bul kralja aleksandra 73, beograd</a></li>
+								<li><a class="phn" href="#"><span> </span>TELEFON:123456789.</a></li>
+							</ul>							
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<p class="copy-right">2015 &copy; Design by <a href="#">Gala Trbojevic i Ana Pesic</a></p>
+				</div>
+			</div>
+			<!---- footer ---->
+	 </body>
+</html>
+
